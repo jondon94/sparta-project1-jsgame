@@ -1,0 +1,9 @@
+canvas {
+  border:1px solid black;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  background-color: grey;
+  background-size: 2000px;
+}
