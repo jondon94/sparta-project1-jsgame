@@ -65,7 +65,7 @@ doorUp.push({
   width:12,
   height: 20,
 });
-
+//////////////timer
 (function(){
     var sec = 60;
     var id = window.setInterval(function() {
@@ -82,7 +82,7 @@ doorUp.push({
 
 canvas.width = width;
 canvas.height = height;
-
+//////////////inputs
 function update(){
   // check keys
     if (keys[38]) {

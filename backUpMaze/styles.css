@@ -6,4 +6,17 @@ canvas {
   margin-bottom: 0px;
   background-color: grey;
   background-size: 2000px;
+  display: inline-block;
+}
+
+.pageTop {
+  display: inline-block;
+}
+
+.howToPlay {
+    display: inline-block;
+}
+
+.highScores {
+  display: inline-block;
 }
