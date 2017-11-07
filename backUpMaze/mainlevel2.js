@@ -59,8 +59,8 @@ killboxes.push({
 var doorUp = [];
 //doorUp
 doorUp.push({
-  x: 880,
-  y: 300,
+  x: 680,
+  y: 500,
   width:12,
   height: 20,
 });
@@ -73,7 +73,7 @@ doorUp.push({
         if (sec < - 1) {
             clearInterval(id);
             alert("Time's up");
-            window.location.reload();
+            window.open("highScores.html", "_self");
             return;
           }
           $('#timer_div').html(sec)
@@ -189,17 +189,17 @@ function update(){
               player.velX = 0;
               player.jumping = false;
               alert("You died")
-              window.location.reload();
+              window.open("highScores.html", "_self");
           } else if (dir === "b") {
               player.grounded = true;
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              window.location.reload();
+              window.open("highScores.html", "_self");
           } else if (dir === "t") {
               player.velY *= -1;
               alert("You died")
-              window.location.reload();
+              window.open("highScores.html", "_self");
           }
       }
       if(player.grounded){
@@ -217,16 +217,16 @@ function update(){
                 player.velX = 0;
                 player.jumping = false;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                window.open("indexlevel3.html", "_self");
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                window.open("indexlevel3.html", "_self");
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                window.open("indexlevel3.html", "_self");
             }
         }
         if(player.grounded){

@@ -1,5 +1,3 @@
-//MAZE OR SMB RipOff
-
 (function() {
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 })();
@@ -20,8 +18,6 @@ var ctx = $('#canvas')[0].getContext("2d"),
     keys = [],
     friction = 0.8,
     gravity = 0.3;
-    sec = 60;
-    score = 0;
 
 //Boxes+Platforms(Shapes go here)
 var boxes = [];
@@ -60,7 +56,7 @@ killboxes.push({
 });
 
 var doorUp = [];
-//doorUp to next level
+//doorUp
 doorUp.push({
   x: 880,
   y: 300,
@@ -69,16 +65,17 @@ doorUp.push({
 });
 //////////////timer
 (function(){
-    var timer = window.setInterval(function() {
+    var sec = 60;
+    var id = window.setInterval(function() {
         sec--;
         if (sec < 0) {
-            clearInterval(timer);
+            clearInterval(id);
             alert("Time's up");
+            window.open("highScores.html", "_self");
             return;
-        }
-
-        $('#timer_div').html(sec);
-    }, 1000/10)
+          }
+          $('#timer_div').html(sec)
+    }, 1000)
 })();
 
 canvas.width = width;
@@ -189,32 +186,18 @@ function update(){
           if (dir === "l" || dir === "r") {
               player.velX = 0;
               player.jumping = false;
-              player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
-              var score = 1;
-              $('#timer_div').remove();
-
-
+              window.open("highScores.html", "_self");
           } else if (dir === "b") {
               player.grounded = true;
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
-              var score = 1;
-              $('#timer_div').remove();
-
-
+              window.open("highScores.html", "_self");
           } else if (dir === "t") {
               player.velY *= -1;
-              player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
-              var score = 1;
-              $('#timer_div').remove();
-
-
+              window.open("highScores.html", "_self");
           }
       }
       if(player.grounded){
