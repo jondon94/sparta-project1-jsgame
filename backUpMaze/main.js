@@ -43,7 +43,7 @@ boxes.push({
 });
 boxes.push({
     x: 100,
-    y: 50,
+    y: 540,
     width: 900,
     height: 20,
 });
@@ -66,7 +66,19 @@ doorUp.push({
   height: 20,
 });
 
-
+(function(){
+    var sec = 60;
+    var id = window.setInterval(function() {
+        sec--;
+        if (sec < - 1) {
+            clearInterval(id);
+            alert("Time's up");
+            window.location.reload();
+            return;
+          }
+          $('#timer_div').html(sec)
+    }, 1000)
+})();
 
 canvas.width = width;
 canvas.height = height;
@@ -205,16 +217,16 @@ function update(){
                 player.velX = 0;
                 player.jumping = false;
                 alert("Well Done")
-                window.location.load(mainlevel2.js);
+                window.open("indexlevel2.html", "_self");
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
-                window.location.load(mainlevel2.js);
+                window.open("indexlevel2.html", "_self");
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
-                window.location.load(mainlevel2.js);
+                window.open("indexlevel2.html", "_self");
             }
         }
         if(player.grounded){
