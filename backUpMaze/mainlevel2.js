@@ -23,13 +23,13 @@ var ctx = $('#canvas')[0].getContext("2d"),
 //Boxes+Platforms(Shapes go here)
 var boxes = [];
 boxes.push({
-    x: 100,
+    x: 500,
     y: 370,
     width: 200,
     height: 50,
 });
 boxes.push({
-    x: 900,
+    x: 200,
     y: 300,
     width: 50,
     height: 300,
@@ -42,25 +42,31 @@ boxes.push({
 });
 boxes.push({
     x: 100,
-    y: 540,
-    width: 900,
-    height: 20,
+    y: 40,
+    width: 20,
+    height: 600,
 });
 
 var killboxes = [];
 //killzones go here
 killboxes.push({
   x: 120,
-  y: 565,
-  width: 150,
-  height: 5,
+  y: 505,
+  width: 5,
+  height: 150,
 });
+killboxes.push({
+  x: 195,
+  y: 300,
+  width: 5,
+  height: 150,
+})
 
 var doorUp = [];
 //doorUp
 doorUp.push({
-  x: 680,
-  y: 500,
+  x: 180,
+  y: 550,
   width:12,
   height: 20,
 });
@@ -72,8 +78,7 @@ doorUp.push({
         sec--;
         if (sec < - 1) {
             clearInterval(id);
-            alert("Time's up");
-            window.open("highScores.html", "_self");
+            $("#canvas").hide();
             return;
           }
           $('#timer_div').html(sec)
@@ -116,12 +121,12 @@ function update(){
         player.height = 18;
     }
 
-    if (keys[40] && keys[39] && player.x < 700){
-        //slide
-        player.width = 18;
-        player.speed = 5
-        player.velX++
-    }
+    // if (keys[40] && keys[39] && player.x < 700){
+    //     //slide
+    //     player.width = 18;
+    //     player.speed = 5
+    //     player.velX++
+    // }
 
     player.velX *= friction;
     player.velY += gravity;
@@ -189,17 +194,22 @@ function update(){
               player.velX = 0;
               player.jumping = false;
               alert("You died")
-              window.open("highScores.html", "_self");
+              player.speed = 0;
+              $("#canvas").hide();
+              player.x = 0;
           } else if (dir === "b") {
               player.grounded = true;
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              window.open("highScores.html", "_self");
+              $("#canvas").hide();
+              player.x = 0;
           } else if (dir === "t") {
               player.velY *= -1;
               alert("You died")
-              window.open("highScores.html", "_self");
+              $("#canvas").hide();
+              player.x = 0;
+              player.speed =0
           }
       }
       if(player.grounded){
@@ -217,15 +227,18 @@ function update(){
                 player.velX = 0;
                 player.jumping = false;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel3.html", "_self");
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel3.html", "_self");
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel3.html", "_self");
             }
         }

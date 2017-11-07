@@ -34,10 +34,10 @@ boxes.push({
     height: 300,
 });
 boxes.push({
-    x: 580,
-    y: 300,
+    x: 780,
+    y: 380,
     width: 50,
-    height: 50,
+    height: 80,
 });
 boxes.push({
     x: 100,
@@ -49,16 +49,16 @@ boxes.push({
 var killboxes = [];
 //killzones go here
 killboxes.push({
-  x: 120,
-  y: 565,
-  width: 150,
-  height: 5,
+  x: 895,
+  y: 360,
+  width: 5,
+  height: 50,
 });
 
 var doorUp = [];
 //doorUp
 doorUp.push({
-  x: 880,
+  x: 890,
   y: 300,
   width:12,
   height: 20,
@@ -70,8 +70,7 @@ doorUp.push({
         sec--;
         if (sec < 0) {
             clearInterval(id);
-            alert("Time's up");
-            window.open("highScores.html", "_self");
+            $("#canvas").hide();
             return;
           }
           $('#timer_div').html(sec)
@@ -114,12 +113,12 @@ function update(){
         player.height = 18;
     }
 
-    if (keys[40] && keys[39] && player.x < 700){
-        //slide
-        player.width = 18;
-        player.speed = 5
-        player.velX++
-    }
+    // if (keys[40] && keys[39] && player.x < 700){
+    //     //slide
+    //     player.width = 18;
+    //     player.speed = 5
+    //     player.velX++
+    // }
 
     player.velX *= friction;
     player.velY += gravity;
@@ -187,17 +186,24 @@ function update(){
               player.velX = 0;
               player.jumping = false;
               alert("You died")
-              window.open("highScores.html", "_self");
+              $("#canvas").hide();
+              player.speed = 0;
+              player.x = 0;
+
           } else if (dir === "b") {
               player.grounded = true;
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              window.open("highScores.html", "_self");
+              $("#canvas").hide();
+              player.x = 0;
+
           } else if (dir === "t") {
               player.velY *= -1;
+              player.speed = 0
               alert("You died")
-              window.open("highScores.html", "_self");
+              $("#canvas").hide();
+              player.x = 0;
           }
       }
       if(player.grounded){
@@ -215,16 +221,19 @@ function update(){
                 player.velX = 0;
                 player.jumping = false;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                player.x = 0;
+                window.open("indexlevel4.html", "_self");
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                player.x = 0;
+                window.open("indexlevel4.html", "_self");
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
-                window.open("indexlevel2.html", "_self");
+                player.x = 0;
+                window.open("indexlevel4.html", "_self");
             }
         }
         if(player.grounded){

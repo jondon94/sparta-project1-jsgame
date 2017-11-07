@@ -73,12 +73,11 @@ doorUp.push({
         sec--;
         if (sec < 0) {
             clearInterval(timer);
-            alert("Time's up");
+            $("#canvas").hide();
             return;
         }
-
         $('#timer_div').html(sec);
-    }, 1000/10)
+    }, 1000/2)
 })();
 
 canvas.width = width;
@@ -117,12 +116,12 @@ function update(){
         player.height = 18;
     }
 
-    if (keys[40] && keys[39] && player.x < 700){
-        //slide
-        player.width = 18;
-        player.speed = 5
-        player.velX++
-    }
+    // if (keys[40] && keys[39] && player.x < 700){
+    //     //slide
+    //     player.width = 18;
+    //     player.speed = 5
+    //     player.velX++
+    // }
 
     player.velX *= friction;
     player.velY += gravity;
@@ -191,9 +190,10 @@ function update(){
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
+              $("#canvas").remove();
               var score = 1;
               $('#timer_div').remove();
+              player.x = 0;
 
 
           } else if (dir === "b") {
@@ -201,18 +201,20 @@ function update(){
               player.jumping = false;
               player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
+              $("#canvas").remove();
               var score = 1;
               $('#timer_div').remove();
+              player.x = 0;
 
 
           } else if (dir === "t") {
               player.velY *= -1;
               player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
+              $("#canvas").remove();
               var score = 1;
               $('#timer_div').remove();
+              player.x = 0;
 
 
           }
@@ -232,16 +234,22 @@ function update(){
                 player.velX = 0;
                 player.jumping = false;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel2.html", "_self");
+                return;
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel2.html", "_self");
+                return;
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
+                player.x = 0;
                 window.open("indexlevel2.html", "_self");
+                return;
             }
         }
         if(player.grounded){
