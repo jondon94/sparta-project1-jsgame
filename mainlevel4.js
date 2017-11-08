@@ -18,63 +18,82 @@ var ctx = $('#canvas')[0].getContext("2d"),
     keys = [],
     friction = 0.8,
     gravity = 0.3;
+    sec = 60;
+    score = 0;
 
 //Boxes+Platforms(Shapes go here)
 var boxes = [];
 boxes.push({
-    x: 100,
-    y: 370,
-    width: 200,
-    height: 50,
+    x: 150,
+    y: 450,
+    width: 40,
+    height: 70,
 });
 boxes.push({
-    x: 900,
+    x: 500,
     y: 300,
     width: 50,
     height: 300,
 });
 boxes.push({
-    x: 780,
-    y: 380,
+    x: 580,
+    y: 300,
     width: 50,
-    height: 80,
+    height: 50,
 });
 boxes.push({
     x: 100,
-    y: 540,
-    width: 900,
+    y: 561,
+    width: 400,
     height: 20,
 });
 
 var killboxes = [];
 //killzones go here
 killboxes.push({
-  x: 895,
-  y: 360,
+  x: 120,
+  y: 560,
+  width: 150,
+  height: 5,
+});
+killboxes.push({
+  x: 700,
+  y: 480,
   width: 5,
-  height: 50,
+  height: 70,
+});
+killboxes.push({
+  x: 750,
+  y: 480,
+  width: 5,
+  height: 70,
+});
+killboxes.push({
+  x: 700,
+  y: 540,
+  width: 50,
+  height: 5,
 });
 
 var doorUp = [];
-//doorUp
+//doorUp to next level
 doorUp.push({
-  x: 890,
-  y: 300,
+  x: 720,
+  y: 500,
   width:12,
   height: 20,
 });
 //////////////timer
 (function(){
-    var sec = 60;
-    var id = window.setInterval(function() {
+    var timer = window.setInterval(function() {
         sec--;
         if (sec < 0) {
-            clearInterval(id);
+            clearInterval(timer);
             $("#canvas").hide();
             return;
-          }
-          $('#timer_div').html(sec)
-    }, 1000)
+        }
+        $('#timer_div').html(sec);
+    }, 1000/2)
 })();
 
 canvas.width = width;
@@ -112,13 +131,6 @@ function update(){
     } else if (player.height = 10) {
         player.height = 18;
     }
-
-    // if (keys[40] && keys[39] && player.x < 700){
-    //     //slide
-    //     player.width = 18;
-    //     player.speed = 5
-    //     player.velX++
-    // }
 
     player.velX *= friction;
     player.velY += gravity;
@@ -184,25 +196,30 @@ function update(){
 
           if (dir === "l" || dir === "r") {
               player.velX = 0;
-              player.jumping = false;
-              alert("You died")
-              $("#canvas").hide();
               player.speed = 0;
+              alert("You died")
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
               player.x = 0;
 
+
           } else if (dir === "b") {
-              player.grounded = true;
-              player.jumping = false;
               player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
               player.x = 0;
+
 
           } else if (dir === "t") {
               player.velY *= -1;
-              player.speed = 0
+              player.speed = 0;
               alert("You died")
-              $("#canvas").hide();
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
               player.x = 0;
           }
       }
@@ -222,18 +239,21 @@ function update(){
                 player.jumping = false;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel4.html", "_self");
+                window.open("indexlevel5.html", "_self");
+                return;
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel4.html", "_self");
+                window.open("indexlevel5.html", "_self");
+                return;
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel4.html", "_self");
+                window.open("indexlevel5.html", "_self");
+                return;
             }
         }
         if(player.grounded){

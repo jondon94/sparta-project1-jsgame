@@ -1,51 +1,88 @@
+//MAZE OR SMB RipOff
+
 (function() {
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 })();
 
 var ctx = $('#canvas')[0].getContext("2d"),
     width = 1000,
-    height = 400,
+    height = 600,
     player = {
       x: width/2,
       y: height - 5,
-      width: 10,
-      height: 18,
       speed: 3,
       velX: 0,
       velY: 0,
+      width: 10,
+      height: 18,
       jumping: false
     },
     keys = [],
     friction = 0.8,
-    gravity = 0.4,
-    speed = 3,
-    velX = 0;
-
-var boxes = []
+    gravity = 0.3;
+    sec = 60;
+    score = 0;
 
 //Boxes+Platforms(Shapes go here)
+var boxes = [];
 boxes.push({
     x: 100,
     y: 370,
     width: 200,
-    height: 50
+    height: 50,
 });
 boxes.push({
     x: 900,
-    y: 100,
-    width: 50,
-    height: 300
-});
-boxes.push({
-    x: 200,
     y: 300,
     width: 50,
-    height: 50
+    height: 300,
 });
+boxes.push({
+    x: 580,
+    y: 300,
+    width: 50,
+    height: 50,
+});
+boxes.push({
+    x: 100,
+    y: 540,
+    width: 900,
+    height: 20,
+});
+
+var killboxes = [];
+//killzones go here
+killboxes.push({
+  x: 120,
+  y: 560,
+  width: 150,
+  height: 5,
+});
+
+var doorUp = [];
+//doorUp to next level
+doorUp.push({
+  x: 880,
+  y: 300,
+  width:12,
+  height: 20,
+});
+//////////////timer
+(function(){
+    var timer = window.setInterval(function() {
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+            $("#canvas").hide();
+            return;
+        }
+        $('#timer_div').html(sec);
+    }, 1000/2)
+})();
 
 canvas.width = width;
 canvas.height = height;
-
+//////////////inputs
 function update(){
   // check keys
     if (keys[38]) {
@@ -58,17 +95,14 @@ function update(){
 
     if (keys[39]) {
         // right arrow
-        if (player.velX < player.speed && player.x < 700) {
+        if (player.velX < player.speed && player.x < 980) {
             player.velX++;
-          } else if ( player.velX < player.speed && player.x >= 700) {
-            boxes.velX--;
-
           }
     }
 
     if (keys[37]) {
         // left arrow
-        if (player.velX > -player.speed && player.x > 200) {
+        if (player.velX > -player.speed && player.x > 10) {
             player.velX--;
         }
     }
@@ -82,11 +116,12 @@ function update(){
         player.height = 18;
     }
 
-    if (keys[40] && keys[39] && player.x < 700){
-        //slide
-        player.speed = 5
-        player.velX++
-    }
+    // if (keys[40] && keys[39] && player.x < 700){
+    //     //slide
+    //     player.width = 18;
+    //     player.speed = 5
+    //     player.velX++
+    // }
 
     player.velX *= friction;
     player.velY += gravity;
@@ -94,22 +129,39 @@ function update(){
     player.x += player.velX;
     player.y += player.velY;
 
+
     if(player.y >= height-player.height){
         player.y = height - player.height;
         player.jumping = false;
     }
 
   //These are object in world
-  ctx.clearRect(0,0,width,height,0,0);
+  ctx.clearRect(0,0,width,height);
   ctx.fillStyle = "black";
   ctx.beginPath();
   for (var i = 0; i < boxes.length; i++) {
       ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height, boxes[i].speed, boxes[i].velX);
   }
+  ctx.fill();
 
+  ctx.fillStyle = "orange";
+  ctx.beginPath();
+  for (var i = 0; i < killboxes.length; i++) {
+    ctx.rect(killboxes[i].x, killboxes[i].y, killboxes[i].width, killboxes[i].height);
+  }
+  ctx.fill();
+
+  ctx.fillStyle = "lightblue";
+  ctx.beginPath();
+  for (var i = 0; i < doorUp.length; i++) {
+    ctx.rect(doorUp[i].x, doorUp[i].y, doorUp[i].width, doorUp[i].height);
+  }
+  ctx.fill();
+
+///////////platforms below
   player.grounded = false;
     for (var i = 0; i < boxes.length; i++) {
-        ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height, boxes[i].speed, boxes[i].velX);
+        ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
         var dir = colCheck(player, boxes[i]);
 
@@ -122,17 +174,87 @@ function update(){
         } else if (dir === "t") {
             player.velY *= -1;
         }
-
     }
-
     if(player.grounded){
          player.velY = 0;
     }
+//////////killboxes below
+    player.grounded = false;
+      for (var i = 0; i < killboxes.length; i++) {
+          ctx.rect(killboxes[i].x, killboxes[i].y, killboxes[i].width, killboxes[i].height);
 
-  ctx.fill();
+          var dir = colCheck(player, killboxes[i]);
+
+          if (dir === "l" || dir === "r") {
+              player.velX = 0;
+              player.speed = 0;
+              alert("You died")
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
+              player.x = 0;
+
+
+          } else if (dir === "b") {
+              player.speed = 0;
+              alert("You died")
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
+              player.x = 0;
+
+
+          } else if (dir === "t") {
+              player.velY *= -1;
+              player.speed = 0;
+              alert("You died")
+              $("#canvas").remove();
+              var score = 1;
+              $('#timer_div').remove();
+              player.x = 0;
+
+
+          }
+      }
+      if(player.grounded){
+           player.velY = 0;
+      }
+
+/////////////////Next level Door
+      player.grounded = false;
+        for (var i = 0; i < doorUp.length; i++) {
+            ctx.rect(doorUp[i].x, doorUp[i].y, doorUp[i].width, doorUp[i].height);
+
+            var dir = colCheck(player, doorUp[i]);
+
+            if (dir === "l" || dir === "r") {
+                player.velX = 0;
+                player.jumping = false;
+                alert("Well Done")
+                player.x = 0;
+                window.open("indexlevel2.html", "_self");
+                return;
+            } else if (dir === "b") {
+                player.grounded = true;
+                player.jumping = false;
+                alert("Well Done")
+                player.x = 0;
+                window.open("indexlevel2.html", "_self");
+                return;
+            } else if (dir === "t") {
+                player.velY *= -1;
+                alert("Well Done")
+                player.x = 0;
+                window.open("indexlevel2.html", "_self");
+                return;
+            }
+        }
+        if(player.grounded){
+             player.velY = 0;
+        }
+
   ctx.fillStyle = "red";
   ctx.fillRect(player.x, player.y, player.width, player.height);
-  //////////////
 
   requestAnimationFrame(update);
 }

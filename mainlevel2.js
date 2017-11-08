@@ -192,14 +192,11 @@ function update(){
 
           if (dir === "l" || dir === "r") {
               player.velX = 0;
-              player.jumping = false;
               alert("You died")
               player.speed = 0;
               $("#canvas").hide();
               player.x = 0;
           } else if (dir === "b") {
-              player.grounded = true;
-              player.jumping = false;
               player.speed = 0;
               alert("You died")
               $("#canvas").hide();

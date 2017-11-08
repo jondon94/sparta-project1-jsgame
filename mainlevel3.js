@@ -1,5 +1,3 @@
-//MAZE OR SMB RipOff
-
 (function() {
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 })();
@@ -20,8 +18,6 @@ var ctx = $('#canvas')[0].getContext("2d"),
     keys = [],
     friction = 0.8,
     gravity = 0.3;
-    sec = 60;
-    score = 0;
 
 //Boxes+Platforms(Shapes go here)
 var boxes = [];
@@ -38,10 +34,10 @@ boxes.push({
     height: 300,
 });
 boxes.push({
-    x: 580,
-    y: 300,
+    x: 780,
+    y: 380,
     width: 50,
-    height: 50,
+    height: 80,
 });
 boxes.push({
     x: 100,
@@ -53,31 +49,32 @@ boxes.push({
 var killboxes = [];
 //killzones go here
 killboxes.push({
-  x: 120,
-  y: 565,
-  width: 150,
-  height: 5,
+  x: 895,
+  y: 360,
+  width: 5,
+  height: 50,
 });
 
 var doorUp = [];
-//doorUp to next level
+//doorUp
 doorUp.push({
-  x: 880,
+  x: 890,
   y: 300,
   width:12,
   height: 20,
 });
 //////////////timer
 (function(){
-    var timer = window.setInterval(function() {
+    var sec = 60;
+    var id = window.setInterval(function() {
         sec--;
         if (sec < 0) {
-            clearInterval(timer);
+            clearInterval(id);
             $("#canvas").hide();
             return;
-        }
-        $('#timer_div').html(sec);
-    }, 1000/2)
+          }
+          $('#timer_div').html(sec)
+    }, 1000)
 })();
 
 canvas.width = width;
@@ -187,36 +184,23 @@ function update(){
 
           if (dir === "l" || dir === "r") {
               player.velX = 0;
-              player.jumping = false;
-              player.speed = 0;
               alert("You died")
-              $("#canvas").remove();
-              var score = 1;
-              $('#timer_div').remove();
+              $("#canvas").hide();
+              player.speed = 0;
               player.x = 0;
-
 
           } else if (dir === "b") {
-              player.grounded = true;
-              player.jumping = false;
               player.speed = 0;
               alert("You died")
-              $("#canvas").remove();
-              var score = 1;
-              $('#timer_div').remove();
+              $("#canvas").hide();
               player.x = 0;
-
 
           } else if (dir === "t") {
               player.velY *= -1;
-              player.speed = 0;
+              player.speed = 0
               alert("You died")
-              $("#canvas").remove();
-              var score = 1;
-              $('#timer_div').remove();
+              $("#canvas").hide();
               player.x = 0;
-
-
           }
       }
       if(player.grounded){
@@ -235,21 +219,18 @@ function update(){
                 player.jumping = false;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel2.html", "_self");
-                return;
+                window.open("indexlevel4.html", "_self");
             } else if (dir === "b") {
                 player.grounded = true;
                 player.jumping = false;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel2.html", "_self");
-                return;
+                window.open("indexlevel4.html", "_self");
             } else if (dir === "t") {
                 player.velY *= -1;
                 alert("Well Done")
                 player.x = 0;
-                window.open("indexlevel2.html", "_self");
-                return;
+                window.open("indexlevel4.html", "_self");
             }
         }
         if(player.grounded){

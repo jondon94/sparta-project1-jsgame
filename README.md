@@ -1,1 +1,0 @@
-# sparta-project1-jsgame
