@@ -20,6 +20,7 @@ var ctx = $('#canvas')[0].getContext("2d"),
     sawTile = new Image(),
     doorTile = new Image(),
     fireTile = new Image(),
+    backGroundAudio = new Audio('../Music/Zombie_Game_Looping.mp3'),
     brickPat = ctx.createPattern(brickTile, "repeat")
     keys = [],
     friction = 0.8,
@@ -602,6 +603,9 @@ function colCheck(shapeA, shapeB) {
   }
   return colDir;
 }
+
+backGroundAudio.play();
+backGroundAudio.loop = true;
 
 $(this).on("keydown", function(e){
   keys[e.keyCode] = true;
