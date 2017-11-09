@@ -28,7 +28,7 @@ var ctx = $('#canvas')[0].getContext("2d"),
   sec = 60;
   score = 0;
 
-playChar.src = "../images/robotSprite.png"
+playChar.src = "../images/sprite.png"
 brickTile.src = "../images/bricks.jpg"
 sawTile.src = "../images/Circular_saw_blade.png"
 doorTile.src = "../images/Door.png"
@@ -417,7 +417,7 @@ doorUp.push({
     sec--;
     if (sec < 0) {
       clearInterval(timer);
-      $("#canvas").hide();
+      window.open("deadindex.html", "_self");
       return;
     }
     $('#timer_div').html(sec);
@@ -529,28 +529,19 @@ function update(){
       if (dir === "l" || dir === "r") {
           player.velX = 0;
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
 
 
       } else if (dir === "b") {
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
 
       } else if (dir === "t") {
           player.velY *= -1;
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
       }
   }
@@ -568,28 +559,19 @@ function update(){
     if (dir === "l" || dir === "r") {
         player.velX = 0;
         player.speed = 0;
-        alert("You died")
-        $("#canvas").remove();
-        var score = 1;
-        $('#timer_div').remove();
+        window.open("deadindex.html", "_self");
         player.x = 0;
 
 
     } else if (dir === "b") {
         player.speed = 0;
-        alert("You died")
-        $("#canvas").remove();
-        var score = 1;
-        $('#timer_div').remove();
+        window.open("deadindex.html", "_self");
         player.x = 0;
 
     } else if (dir === "t") {
         player.velY *= -1;
         player.speed = 0;
-        alert("You died")
-        $("#canvas").remove();
-        var score = 1;
-        $('#timer_div').remove();
+        window.open("deadindex.html", "_self");
         player.x = 0;
     }
   }
@@ -608,7 +590,6 @@ function update(){
       if (dir === "l" || dir === "r") {
         player.velX = 0;
         player.jumping = false;
-        alert("Well Done")
         player.x = 0;
         window.open("indexlevel3.html", "_self");
         return;
@@ -616,14 +597,12 @@ function update(){
       else if (dir === "b") {
         player.grounded = true;
         player.jumping = false;
-        alert("Well Done")
         player.x = 0;
         window.open("indexlevel3.html", "_self");
         return;
       }
        else if (dir === "t") {
         player.velY *= -1;
-        alert("Well Done")
         player.x = 0;
         window.open("indexlevel3.html", "_self");
         return;

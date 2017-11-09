@@ -1,14 +1,12 @@
-//MAZE OR SMB RipOff
-
 (function() {
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 })();
 
-var ctx = $('#canvas')[0].getContext("2d"),
+var ctx = $('#surface')[0].getContext("2d"),
   width = 1000,
   height = 600,
   player = {
-    x: width/2,
+    x: 20,
     y: height-5,
     speed: 3,
     velX: 0,
@@ -22,12 +20,17 @@ var ctx = $('#canvas')[0].getContext("2d"),
   sawTile = new Image(),
   doorTile = new Image(),
   fireTile = new Image(),
-  backGroundAudio = new Audio('../Music/Zombie_Game_Looping.mp3'),
+  backGroundAudio = new Audio('../Music/Fuji_Looping.mp3'),
   keys = [],
   friction = 0.8,
   gravity = 0.3;
   sec = 60;
   score = 0;
+
+var boxes = [];
+var sawboxes = [];
+var fireboxes = [];
+var doorUp = [];
 
 playChar.src = "../images/sprite.png"
 brickTile.src = "../images/bricks.jpg"
@@ -35,255 +38,8 @@ sawTile.src = "../images/Circular_saw_blade.png"
 doorTile.src = "../images/Door.png"
 fireTile.src = "../images/fire.png"
 
-//Boxes+Platforms+Environments(Shapes go here)
-var boxes = [];
-boxes.push({
-  x: 475,
-  y: 370,
-  width: 20,
-  height: 180,
-});
-boxes.push({
-  x: 900,
-  y: 300,
-  width: 50,
-  height: 300,
-});
-boxes.push({
-  x: 540,
-  y: 350,
-  width: 10,
-  height: 120,
-});
-boxes.push({
-  x: 420,
-  y: 350,
-  width: 10,
-  height: 150,
-});
-boxes.push({
-  x: 100,
-  y: 540,
-  width: 900,
-  height: 20,
-});
-boxes.push({
-  x: 820,
-  y: 320,
-  width: 40,
-  height: 20,
-});
-boxes.push({
-  x: 0,
-  y: 0,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 100,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 200,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 300,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 400,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 500,
-  width: 40,
-  height: 100,
-});
-boxes.push({
-  x: 0,
-  y: 300,
-  width: 300,
-  height: 50,
-});
-boxes.push({
-  x: 20,
-  y: 560,
-  width: 60,
-  height: 40,
-});
-boxes.push({
-  x: 0,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 150,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 300,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 450,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 600,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 750,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 900,
-  y: 0,
-  width: 150,
-  height: 50,
-});
-boxes.push({
-  x: 950,
-  y: 0,
-  width: 50,
-  height: 100,
-});
-boxes.push({
-  x: 950,
-  y: 100,
-  width: 50,
-  height: 100,
-});
-boxes.push({
-  x: 950,
-  y: 200,
-  width: 50,
-  height: 100,
-});
-boxes.push({
-  x: 950,
-  y: 300,
-  width: 50,
-  height: 100,
-});
-boxes.push({
-  x: 950,
-  y: 400,
-  width: 50,
-  height: 100,
-});
-boxes.push({
-  x: 950,
-  y: 500,
-  width: 50,
-  height: 100,
-});
-
-var fireboxes = [];
-//fireboxes go here
-fireboxes.push({
-  x: 140,
-  y: 530,
-  width: 15,
-  height: 15,
-});
-fireboxes.push({
-  x: 155,
-  y: 530,
-  width: 15,
-  height: 15,
-});
-fireboxes.push({
-  x: 170,
-  y: 530,
-  width: 15,
-  height: 15,
-});
-fireboxes.push({
-  x: 185,
-  y: 530,
-  width: 15,
-  height: 15,
-});
-fireboxes.push({
-  x: 900,
-  y: 294,
-  width: 14,
-  height: 15,
-});
-fireboxes.push({
-  x: 914,
-  y: 294,
-  width: 14,
-  height: 15,
-});
-fireboxes.push({
-  x: 928,
-  y: 294,
-  width: 13,
-  height: 15,
-});
-fireboxes.push({
-  x: 941,
-  y: 294,
-  width: 13,
-  height: 15,
-});
-
-var sawboxes = [];
-//sawboxes
-sawboxes.push({
-  x: 450,
-  y: 350,
-  width: 65,
-  height: 65,
-});
-
-var doorUp = [];
-//doorUp to next level
-doorUp.push({
-  x: 830,
-  y: 300,
-  width:12,
-  height: 20,
-});
-
-//////////////timer
-(function(){
-  var timer = window.setInterval(function() {
-    sec--;
-    if (sec < 0) {
-      clearInterval(timer);
-      window.open("deadindex.html", "_self");
-      return;
-    }
-    $('#timer_div').html(sec);
-}, 1000/2)
-})();
-
-canvas.width = width;
-canvas.height = height;
+surface.width = width;
+surface.height = height;
 //////////////inputs
 function update(){
   // check keys
@@ -424,14 +180,12 @@ function update(){
       } else if (dir === "b") {
           player.speed = 0;
           window.open("deadindex.html", "_self");
-          var score = 1;
           player.x = 0;
 
       } else if (dir === "t") {
           player.velY *= -1;
           player.speed = 0;
           window.open("deadindex.html", "_self");
-          var score = 1;
           player.x = 0;
       }
   }
@@ -451,18 +205,18 @@ function update(){
             player.velX = 0;
             player.jumping = false;
             player.x = 0;
-            window.open("indexlevel2.html", "_self");
+            window.open("surface.js", "_self");
             return;
         } else if (dir === "b") {
             player.grounded = true;
             player.jumping = false;
             player.x = 0;
-            window.open("indexlevel2.html", "_self");
+            window.open("surface.js", "_self");
             return;
         } else if (dir === "t") {
             player.velY *= -1;
             player.x = 0;
-            window.open("indexlevel2.html", "_self");
+            window.open("surface.js", "_self");
             return;
         }
       }
@@ -471,7 +225,7 @@ function update(){
       }
 
   ctx.clearRect(player.x, player.y, player.width, player.height);
-  ctx.drawImage(playChar, player.x-10, player.y-15, 35, 35);
+  ctx.drawImage(playChar, player.x-10, player.y-70, 100, 100);
 
   requestAnimationFrame(update);
 }
@@ -527,8 +281,8 @@ $(this).on("load", function(){
 })
 
 window.addEventListener("keydown", function(e) {
-    // space and arrow keys
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-        e.preventDefault();
-    }
+  // space and arrow keys
+  if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+  }
 }, false);

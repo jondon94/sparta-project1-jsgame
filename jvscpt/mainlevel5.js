@@ -6,7 +6,7 @@ var ctx = $('#canvas')[0].getContext("2d"),
   width = 1000,
   height = 600,
   player = {
-    x: width/2,
+    x: 20,
     y: height-5,
     speed: 3,
     velX: 0,
@@ -27,7 +27,7 @@ var ctx = $('#canvas')[0].getContext("2d"),
   sec = 60;
   score = 0;
 
-playChar.src = "../images/robotSprite.png"
+playChar.src = "../images/sprite.png"
 brickTile.src = "../images/bricks.jpg"
 sawTile.src = "../images/Circular_saw_blade.png"
 doorTile.src = "../images/Door.png"
@@ -35,19 +35,313 @@ fireTile.src = "../images/fire.png"
 
 //Boxes+Platforms+Environments(Shapes go here)
 var boxes = [];
+////bottom row
+boxes.push({
+  x: 0,
+  y: 580,
+  width: 40,
+  height: 30,
+});
+boxes.push({
+  x: 90,
+  y: 490,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 240,
+  y: 490,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 330,
+  y: 440,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 440,
+  y: 560,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 540,
+  y: 470,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 640,
+  y: 400,
+  width: 30,
+  height: 40,
+});
+boxes.push({
+  x: 760,
+  y: 520,
+  width: 120,
+  height: 20,
+});
+////rhs
+boxes.push({
+  x: 840,
+  y: 200,
+  width: 30,
+  height: 280,
+});
+boxes.push({
+  x: 960,
+  y: 100,
+  width: 40,
+  height: 500,
+});
+////top row
+boxes.push({
+  x: 0,
+  y: 200,
+  width: 200,
+  height: 50,
+});
+boxes.push({
+  x: 300,
+  y: 200,
+  width: 200,
+  height: 50,
+});
+boxes.push({
+  x: 600,
+  y: 200,
+  width: 270,
+  height: 50,
+});
+boxes.push({
+  x: 80,
+  y: 65,
+  width: 15,
+  height: 100,
+})
+boxes.push({
+  x: 30,
+  y: 100,
+  width: 15,
+  height: 100,
+})
 
 var fireboxes = [];
 //fireboxes go here
-
+////bottom row
+fireboxes.push({
+  x: 170,
+  y: 490,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 300,
+  y: 450,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 370,
+  y: 450,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 600,
+  y: 480,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 690,
+  y: 480,
+  width: 15,
+  height: 25,
+});
+////rhs
+fireboxes.push({
+  x: 900,
+  y: 520,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 900,
+  y: 430,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 900,
+  y: 340,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 900,
+  y: 250,
+  width: 15,
+  height: 25,
+});
+////top row
+fireboxes.push({
+  x: 540,
+  y: 90,
+  width: 15,
+  height: 25,
+});
+fireboxes.push({
+  x: 240,
+  y: 90,
+  width: 15,
+  height: 25,
+});
 
 var sawboxes = [];
-//sawboxes
+////Bottom row
+sawboxes.push({
+  x: 50,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 100,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 150,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 200,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 250,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 300,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 350,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 400,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 450,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 500,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 550,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 600,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 650,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 700,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 750,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 800,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 850,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+sawboxes.push({
+  x: 900,
+  y: 565,
+  width: 50,
+  height: 50,
+})
+////top row
+sawboxes.push({
+  x: 880,
+  y: 100,
+  width: 70,
+  height: 70,
+})
+sawboxes.push({
+  x: 520,
+  y: 190,
+  width: 70,
+  height: 70,
+})
+sawboxes.push({
+  x: 220,
+  y: 190,
+  width: 70,
+  height: 70,
+})
+sawboxes.push({
+  x: 900,
+  y: 565,
+  width: 50,
+  height: 50,
+})
 
 var doorUp = [];
 //doorUp to next level
 doorUp.push({
-  x: 830,
-  y: 300,
+  x: 80,
+  y: 50,
   width:12,
   height: 20,
 });
@@ -58,7 +352,7 @@ doorUp.push({
     sec--;
     if (sec < 0) {
       clearInterval(timer);
-      $("#canvas").hide();
+      window.open("deadindex.html", "_self");
       return;
     }
     $('#timer_div').html(sec);
@@ -170,28 +464,19 @@ function update(){
         if (dir === "l" || dir === "r") {
             player.velX = 0;
             player.speed = 0;
-            alert("You died")
-            $("#canvas").remove();
-            var score = 1;
-            $('#timer_div').remove();
+            window.open("deadindex.html", "_self");
             player.x = 0;
 
 
         } else if (dir === "b") {
             player.speed = 0;
-            alert("You died")
-            $("#canvas").remove();
-            var score = 1;
-            $('#timer_div').remove();
+            window.open("deadindex.html", "_self");
             player.x = 0;
 
         } else if (dir === "t") {
             player.velY *= -1;
             player.speed = 0;
-            alert("You died")
-            $("#canvas").remove();
-            var score = 1;
-            $('#timer_div').remove();
+            window.open("deadindex.html", "_self");
             player.x = 0;
         }
     }
@@ -209,28 +494,19 @@ function update(){
       if (dir === "l" || dir === "r") {
           player.velX = 0;
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
 
 
       } else if (dir === "b") {
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
 
       } else if (dir === "t") {
           player.velY *= -1;
           player.speed = 0;
-          alert("You died")
-          $("#canvas").remove();
-          var score = 1;
-          $('#timer_div').remove();
+          window.open("deadindex.html", "_self");
           player.x = 0;
       }
   }
@@ -249,22 +525,19 @@ function update(){
         if (dir === "l" || dir === "r") {
             player.velX = 0;
             player.jumping = false;
-            alert("Well Done")
             player.x = 0;
-            window.open("", "_self");
+            window.open("surfaceindex.html", "_self");
             return;
         } else if (dir === "b") {
             player.grounded = true;
             player.jumping = false;
-            alert("Well Done")
             player.x = 0;
-            window.open("", "_self");
+            window.open("surfaceindex.html", "_self");
             return;
         } else if (dir === "t") {
             player.velY *= -1;
-            alert("Well Done")
             player.x = 0;
-            window.open("", "_self");
+            window.open("surfaceindex.html", "_self");
             return;
         }
       }
