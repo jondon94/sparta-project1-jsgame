@@ -1,0 +1,50 @@
+canvas {
+  border:1px solid black;
+  position: absolute;
+  margin-left: 200px;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  background: url('../images/fire_background_hills.png');
+  background-size: 1000px 600px;
+  display: inline-block;
+}
+
+.bodyText {
+  display: inline-block;
+  text-align: center;
+  margin-left: 340px;
+  margin-top: 100px;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: cursive;
+}
+
+.world {
+  display: inline;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: cursive;
+
+}
+
+.highScores {
+  display: inline-block;
+}
+
+body {
+  background-color: black;
+  color: red;
+}
+
+.gameText {
+  position: absolute;
+  display: inline-block;
+  z-index: -1;
+  margin-left: 600px;
+  margin-top: 100px;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: cursive;
+}
