@@ -4,8 +4,8 @@ canvas {
   margin-left: 200px;
   margin-top: 30px;
   margin-bottom: 0px;
-  background-color: grey;
-  background-size: 2000px;
+  background: url('fire_background_hills.png');
+  background-size: 1000px 600px;
   display: inline-block;
 }
 
