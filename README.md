@@ -1,4 +1,4 @@
-# 2D Sparta PLatformer
+# 2D Sparta Platformer
 
 ## The Game
 This game is a 2D platformer similar to other games such as Super Meat Boy.
