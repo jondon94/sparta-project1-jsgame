@@ -29,4 +29,4 @@ _User Stories Delivered_:
 _What went well & Difficulties_:
 >I am pleased I managed to get collisions working properly as that was the most difficult part in he actual mechanics of the game, but also how I got the character to move on pressing the right buttons.
 
-to play https://jondon94.github.io/sparta-project1-jsgame/index.html
+to play https://jondon94.github.io/sparta-project1-jsgame-index.html/
