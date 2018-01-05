@@ -205,18 +205,18 @@ function update(){
             player.velX = 0;
             player.jumping = false;
             player.x = 0;
-            window.open("surface.js", "_self");
+            window.open("surface.html", "_self");
             return;
         } else if (dir === "b") {
             player.grounded = true;
             player.jumping = false;
             player.x = 0;
-            window.open("surface.js", "_self");
+            window.open("surface.html", "_self");
             return;
         } else if (dir === "t") {
             player.velY *= -1;
             player.x = 0;
-            window.open("surface.js", "_self");
+            window.open("surface.html", "_self");
             return;
         }
       }
