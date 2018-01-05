@@ -387,19 +387,19 @@ function update(){
         if (dir === "l" || dir === "r") {
             player.velX = 0;
             player.speed = 0;
-            window.open("webpages/deadindex.html", "_self");
+            window.open("deadindex.html", "_self");
             player.x = 0;
 
 
         } else if (dir === "b") {
             player.speed = 0;
-            window.open("webpages/deadindex.html", "_self");
+            window.open("deadindex.html", "_self");
             player.x = 0;
 
         } else if (dir === "t") {
             player.velY *= -1;
             player.speed = 0;
-            window.open("webpages/deadindex.html", "_self");
+            window.open("deadindex.html", "_self");
             player.x = 0;
         }
     }
@@ -417,20 +417,20 @@ function update(){
       if (dir === "l" || dir === "r") {
           player.velX = 0;
           player.speed = 0;
-          window.open("webpages/deadindex.html", "_self");
+          window.open("deadindex.html", "_self");
           player.x = 0;
 
 
       } else if (dir === "b") {
           player.speed = 0;
-          window.open("webpages/deadindex.html", "_self");
+          window.open("deadindex.html", "_self");
           var score = 1;
           player.x = 0;
 
       } else if (dir === "t") {
           player.velY *= -1;
           player.speed = 0;
-          window.open("webpages/deadindex.html", "_self");
+          window.open("deadindex.html", "_self");
           var score = 1;
           player.x = 0;
       }
@@ -451,18 +451,18 @@ function update(){
             player.velX = 0;
             player.jumping = false;
             player.x = 0;
-            window.open("webapges/indexlevel2.html", "_self");
+            window.open("indexlevel2.html", "_self");
             return;
         } else if (dir === "b") {
             player.grounded = true;
             player.jumping = false;
             player.x = 0;
-            window.open("webapges/indexlevel2.html", "_self");
+            window.open("indexlevel2.html", "_self");
             return;
         } else if (dir === "t") {
             player.velY *= -1;
             player.x = 0;
-            window.open("webapges/indexlevel2.html", "_self");
+            window.open("indexlevel2.html", "_self");
             return;
         }
       }
